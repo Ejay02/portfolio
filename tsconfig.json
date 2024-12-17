@@ -1,0 +1,6 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "types": ["vue/macros-global"]
+  }
+}
