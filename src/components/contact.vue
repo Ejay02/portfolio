@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center items-center min-h-screen">
+  <div class="flex justify-center items-center">
     <div class="rounded-lg shadow-lg overflow-hidden w-full max-w-4xl mb-8">
       <div class="flex flex-col lg:flex-row">
         <!-- Left Container -->
@@ -14,17 +14,17 @@
             <div class="flex justify-center items-center">
               <a
                 href="https://www.linkedin.com/in/ejakpovi/"
-                class="text-white mr-4 hover:text-sky-200"
+                class="text-white mr-4 hover:text-yellow-500 hover:scale-150"
                 target="_blank"
               >
-                LinkedIn
+                <i class="fa-brands fa-linkedin"></i>
               </a>
               <a
                 href="https://github.com/Ejay02?tab=repositories"
-                class="text-white hover:text-sky-200"
+                class="text-white hover:text-yellow-500 hover:scale-150"
                 target="_blank"
               >
-                GitHub
+                <i class="fa-brands fa-github"></i>
               </a>
             </div>
           </div>

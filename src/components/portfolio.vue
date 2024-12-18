@@ -6,17 +6,17 @@
     <Header />
 
     <!-- Skills Section  -->
-    <section id="skills" class="container mx-auto py-40">
+    <section id="skills" class="container mx-auto py-52">
       <Skills />
     </section>
 
     <!-- Projects Section  -->
-    <section id="projects" class="container mx-auto py-16 p-8">
+    <section id="projects" class="container mx-auto py-40 p-10">
       <Projects />
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="container mx-auto py-16">
+    <section id="contact" class="container mx-auto py-40">
       <Contact />
     </section>
 
