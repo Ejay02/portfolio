@@ -6,7 +6,7 @@
     <Header />
 
     <!-- Skills Section  -->
-    <section id="skills" class="container mx-auto py-52">
+    <section id="skills" class="container mx-auto py-72">
       <Skills />
     </section>
 
