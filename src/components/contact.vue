@@ -7,7 +7,7 @@
           <div class="text-center space-y-4">
             <h2 class="text-2xl font-bold text-white">Let's Chat</h2>
             <p class="text-white">
-              Whether you have a question, want to start a project, or simply want to connect.
+              You have a question, want to start a project, or simply want to connect.
             </p>
             <br />
             <p class="text-white">Feel free to send me a message in the contact form.</p>
@@ -42,8 +42,8 @@
                 autofocus
                 @input="validateField('name')"
                 :class="[
-                  'bg-gray-200 w-full p-3 mb-3 rounded focus:outline-none focus:ring-2',
-                  touched.name && errors.name ? 'border-2 border-red-500' : 'focus:ring-sky-500',
+                  'bg-gray-200 w-full p-3 mb-3 rounded focus:outline-none focus:ring-2 cursor-pointer',
+                  touched.name && errors.name ? 'border-2 border-red-500' : 'focus:ring-yellow-500',
                 ]"
               />
               <p v-if="touched.name && errors.name" class="text-red-500 text-sm -mt-2 mb-2">
@@ -57,28 +57,22 @@
                 placeholder="Email *"
                 @input="validateField('email')"
                 :class="[
-                  'bg-gray-200 w-full p-3 mb-3 rounded focus:outline-none focus:ring-2',
-                  touched.email && errors.email ? 'border-2 border-red-500' : 'focus:ring-sky-500',
+                  'bg-gray-200 w-full p-3 mb-3 rounded focus:outline-none focus:ring-2 cursor-pointer',
+                  touched.email && errors.email
+                    ? 'border-2 border-red-500'
+                    : 'focus:ring-yellow-500',
                 ]"
               />
               <p v-if="touched.email && errors.email" class="text-red-500 text-sm -mt-2 mb-2">
                 Valid email is required
               </p>
 
-              <!-- Company Input -->
-              <input
-                v-model="form.company"
-                type="text"
-                placeholder="Company"
-                class="bg-gray-200 w-full p-3 mb-3 rounded focus:outline-none focus:ring-2 focus:ring-sky-500"
-              />
-
               <!-- Phone Input -->
               <input
                 v-model="form.phone"
                 type="tel"
                 placeholder="Phone"
-                class="bg-gray-200 w-full p-3 mb-3 rounded focus:outline-none focus:ring-2 focus:ring-sky-500"
+                class="bg-gray-200 w-full p-3 mb-3 rounded focus:outline-none focus:ring-2 focus:ring-yellow-500 cursor-pointer"
               />
 
               <!-- Message Textarea -->
@@ -86,7 +80,7 @@
                 v-model="form.message"
                 rows="4"
                 placeholder="Message"
-                class="bg-gray-200 w-full p-3 mb-3 rounded focus:outline-none focus:ring-2 focus:ring-sky-500"
+                class="bg-gray-200 w-full p-3 mb-3 rounded focus:outline-none focus:ring-2 focus:ring-yellow-500 cursor-pointer"
               ></textarea>
 
               <!-- Submit Button -->
@@ -115,11 +109,11 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 
+
 // Form data interface
 interface FormData {
   name: string
   email: string
-  company: string
   phone: string
   message: string
 }
@@ -128,7 +122,6 @@ interface FormData {
 const form = ref<FormData>({
   name: '',
   email: '',
-  company: '',
   phone: '',
   message: '',
 })
@@ -184,7 +177,7 @@ const submitForm = () => {
   }
 
   // Construct mailto link
-  const mailtoLink = `mailto:e.jae02@gmail.com?subject=Contact Form Submission&body=Name: ${encodeURIComponent(form.value.name)}%0A%0AEmail: ${encodeURIComponent(form.value.email)}%0A%0ACompany: ${encodeURIComponent(form.value.company)}%0A%0APhone: ${encodeURIComponent(form.value.phone)}%0A%0AMessage: ${encodeURIComponent(form.value.message)}`
+  const mailtoLink = `mailto:e.jae02@gmail.com?subject=Contact Form Submission&body=Name: ${encodeURIComponent(form.value.name)}%0A%0AEmail: ${encodeURIComponent(form.value.email)}0A%0APhone: ${encodeURIComponent(form.value.phone)}%0A%0AMessage: ${encodeURIComponent(form.value.message)}`
 
   // Open default email client
   window.location.href = mailtoLink
@@ -196,7 +189,6 @@ const submitForm = () => {
   form.value = {
     name: '',
     email: '',
-    company: '',
     phone: '',
     message: '',
   }

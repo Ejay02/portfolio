@@ -9,7 +9,10 @@
         <li
           v-for="section in sections"
           :key="section"
-          class="hover:text-yellow-500 transition transform hover:scale-110"
+          :class="[
+            'transition transform hover:scale-110',
+            activeSection === section.toLowerCase() ? 'text-yellow-500' : 'hover:text-yellow-500',
+          ]"
         >
           <a :href="`#${section.toLowerCase()}`">{{ section }}</a>
         </li>
@@ -58,11 +61,11 @@ const isDeleting = ref(false)
 const typingSpeed = ref(100)
 const deletingSpeed = ref(50)
 
-const name = ref('Jane Doe')
 const heroTitle = ref('Full Stack Developer')
 const heroSubtitle = ref('Creating innovative web solutions with passion')
 
 const sections = ['Home', 'Skills', 'Projects', 'Contact']
+const activeSection = ref('home')
 
 // Typing logic
 const typeText = () => {
@@ -92,13 +95,34 @@ const typeText = () => {
   }
 }
 
-// Typing interval
-// let typingInterval:number
-let typingInterval: ReturnType<typeof setInterval>
-
+// Add intersection observer for section detection
 onMounted(() => {
   typingInterval = setInterval(typeText, isDeleting.value ? deletingSpeed.value : typingSpeed.value)
+
+  const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.5,
+  }
+
+  const callback: IntersectionObserverCallback = (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        activeSection.value = entry.target.id
+      }
+    })
+  }
+
+  const observer = new IntersectionObserver(callback, options)
+
+  // Observe all sections
+  sections.forEach((section) => {
+    const element = document.getElementById(section.toLowerCase())
+    if (element) observer.observe(element)
+  })
 })
+
+let typingInterval: ReturnType<typeof setInterval>
 
 onUnmounted(() => {
   clearInterval(typingInterval)
