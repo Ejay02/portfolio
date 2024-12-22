@@ -11,8 +11,16 @@ const router = createRouter({
     },
   ],
   scrollBehavior(to, from, savedPosition) {
-    // Always return to top of page
-    return { top: 0, left: 0 }
+    if (savedPosition) {
+      return savedPosition
+    }
+    if (to.hash) {
+      return {
+        el: to.hash,
+        behavior: 'smooth',
+      }
+    }
+    return { top: 0 }
   },
 })
 

@@ -32,7 +32,7 @@
 
         <!-- Right Container -->
         <div class="flex flex-1 justify-center items-center bg-white p-8">
-          <div class="w-full max-w-md space-y-4 mt-10">
+          <div class="w-full max-w-md space-y-4 mt-10 text-gray-600">
             <form @submit.prevent="submitForm">
               <!-- Name Input -->
               <input
@@ -42,7 +42,7 @@
                 autofocus
                 @input="validateField('name')"
                 :class="[
-                  'bg-gray-200 w-full p-3 mb-3 rounded focus:outline-none focus:ring-2 cursor-pointer',
+                  'bg-gray-200  w-full p-3 mb-3 rounded focus:outline-none focus:ring-2 cursor-pointer',
                   touched.name && errors.name ? 'border-2 border-red-500' : 'focus:ring-yellow-500',
                 ]"
               />
