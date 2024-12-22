@@ -109,7 +109,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 
-
 // Form data interface
 interface FormData {
   name: string
@@ -127,19 +126,23 @@ const form = ref<FormData>({
 })
 
 // Touched state to track which fields have been interacted with
-const touched = ref({
+const touched = ref<Record<keyof FormData, boolean>>({
   name: false,
   email: false,
+  phone: false,
+  message: false,
 })
 
 // Error tracking
-const errors = ref({
+const errors = ref<Record<keyof FormData, boolean>>({
   name: false,
   email: false,
+  phone: false,
+  message: false,
 })
 
 // Validate specific field
-const validateField = (fieldName: keyof typeof form.value) => {
+const validateField = (fieldName: keyof FormData) => {
   // Mark the field as touched
   touched.value[fieldName] = true
 
@@ -165,11 +168,10 @@ const isValidEmail = (email: string): boolean => {
 // Form submission handler
 const submitForm = () => {
   // Validate all fields before submission
-  touched.value.name = true
-  touched.value.email = true
-
-  validateField('name')
-  validateField('email')
+  Object.keys(form.value).forEach((field) => {
+    touched.value[field as keyof FormData] = true
+    validateField(field as keyof FormData)
+  })
 
   // Check form validity
   if (!isFormValid.value) {
@@ -195,6 +197,8 @@ const submitForm = () => {
   touched.value = {
     name: false,
     email: false,
+    phone: false,
+    message: false,
   }
 }
 </script>
