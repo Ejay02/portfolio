@@ -91,12 +91,22 @@ const skills = ref([
   {
     name: 'Backend',
     icon: ServerIcon,
-    details: ['Node.js', 'Nest.js', 'Express.js', 'REST APIs', 'GraphQL', 'Python', 'GO', 'PHP'],
+    details: [
+      'Node.js',
+      'Nest.js',
+      'Express.js',
+      'REST APIs',
+      'GraphQL',
+      'Python',
+      'GO',
+      'PHP',
+      'TypeORM',
+    ],
   },
   {
     name: 'Database',
     icon: CircleStackIcon,
-    details: ['MongoDB', 'PostgreSQL', 'Prisma', 'Redis'],
+    details: ['MySQL', 'NoSQL', 'Prisma', 'Redis'],
   },
   {
     name: 'Cloud',
