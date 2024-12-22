@@ -111,7 +111,7 @@ const skills = ref([
   {
     name: 'Cloud',
     icon: CloudIcon,
-    details: ['AWS', 'Docker', 'CI/CD', 'Kubernetes', 'Serverless'],
+    details: ['AWS', 'Docker', 'CI/CD'],
   },
   {
     name: 'Analytics',
