@@ -10,7 +10,7 @@
     </section>
 
     <!-- Skills Section  -->
-    <section id="skills" class="container mx-auto py-72">
+    <section id="skills" class="container mx-auto py-40">
       <Skills />
     </section>
 
