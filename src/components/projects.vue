@@ -6,7 +6,9 @@
       <div
         class="carousel__item bg-gray-800 rounded-lg overflow-hidden shadow-lg transform transition hover:scale-105 hover:shadow-2xl m-2 h-full flex flex-col"
       >
-        <div class="relative w-full aspect-video overflow-hidden">
+        <div
+          class="relative sm:w-80 md:w-96 lg:w-full h-48 sm:h-60 md:h-72 lg:h-60 aspect-video overflow-hidden"
+        >
           <img
             :src="project.image"
             :alt="project.name"
@@ -81,9 +83,15 @@ const projects = ref([
     liveLink: 'https://quick-dash.netlify.app',
   },
   {
+    name: 'Restaurant Admin',
+    description: 'Admin dashboard for food-ordering website.',
+    image: '/rest_admin.png',
+    githubLink: 'https://github.com/Ejay02/restaurant_dash',
+    liveLink: 'https://quick-dash-restaurant.netlify.app',
+  },
+  {
     name: 'School dashboard',
-    description:
-      'platform to manage and track academic activities.',
+    description: 'Platform to manage and track academic activities.',
     image: '/schoolDash.png',
     githubLink: 'https://github.com/Ejay02/school-dashboard-ui',
     liveLink: 'https://eduhub-portal.netlify.app',
