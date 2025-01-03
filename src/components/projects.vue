@@ -90,7 +90,7 @@ const projects = ref([
     liveLink: 'https://quick-dash-restaurant.netlify.app',
   },
   {
-    name: 'School dashboard',
+    name: 'School Dashboard',
     description: 'Platform to manage and track academic activities.',
     image: '/schoolDash.png',
     githubLink: 'https://github.com/Ejay02/school-dashboard-ui',
