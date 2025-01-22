@@ -92,8 +92,8 @@ const projects = ref([
   {
     name: 'School Dashboard',
     description: 'Platform to manage and track academic activities.',
-    image: '/schoolDash.png',
-    githubLink: 'https://github.com/Ejay02/school-dashboard-ui',
+    image: '/lms.png',
+    githubLink: 'https://github.com/Ejay02/school-management-frontend',
     liveLink: 'https://eduhub-portal.netlify.app',
   },
 ])

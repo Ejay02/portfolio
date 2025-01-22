@@ -101,6 +101,7 @@ const skills = ref([
       'GO',
       'PHP',
       'TypeORM',
+      'Socket.IO',
     ],
   },
   {
