@@ -7,9 +7,12 @@
       {{ heroSubtitle }}
     </p>
     <div class="flex justify-center space-x-4">
-      <a href="#contact" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-full transition">
+      <router-link
+        to="/contact"
+        class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-full transition animate-shake hover:animate-shake"
+      >
         Contact Me
-      </a>
+      </router-link>
       <a
         href="/public/ej_resume.pdf"
         target="_blank"

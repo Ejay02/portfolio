@@ -8,20 +8,23 @@
       <ul class="flex space-x-6">
         <li
           v-for="section in sections"
-          :key="section"
+          :key="section.name"
           :class="[
             'transition transform hover:scale-110',
-            activeSection === section.toLowerCase() ? 'text-yellow-500' : 'hover:text-yellow-500',
+            activeSection === section.route ? 'text-yellow-500' : 'hover:text-yellow-500',
           ]"
         >
-          <a :href="`#${section.toLowerCase()}`">{{ section }}</a>
+          <router-link
+            :to="section.route"
+            class="capitalize"
+            @click="activeSection = section.route"
+          >
+            {{ section.name }}
+          </router-link>
         </li>
       </ul>
     </nav>
   </header>
-
-  <!-- home -->
- 
 </template>
 
 <script setup lang="ts">
@@ -40,32 +43,30 @@ const isDeleting = ref(false)
 const typingSpeed = ref(100)
 const deletingSpeed = ref(50)
 
-
-
-const sections = ['Home', 'Skills', 'Projects', 'Contact']
-const activeSection = ref('home')
+const sections = [
+  { name: 'Home', route: '/' },
+  { name: 'Skills', route: '/skills' },
+  { name: 'Projects', route: '/projects' },
+  { name: 'Contact', route: '/contact' },
+]
+const activeSection = ref(sections[0].route)
 
 // Typing logic
 const typeText = () => {
   const current = textToType.value
-  const currentSubtitle = subtitles[currentSubtitleIndex.value]
 
   if (!isDeleting.value) {
-    // Typing
     if (displayedText.value.length < current.length) {
       displayedText.value = current.slice(0, displayedText.value.length + 1)
     } else {
-      // Start typing subtitle after a pause
       setTimeout(() => {
         isDeleting.value = true
       }, 1000)
     }
   } else {
-    // Deleting
     if (displayedText.value.length > 0) {
       displayedText.value = displayedText.value.slice(0, -1)
     } else {
-      // Move to next subtitle
       isDeleting.value = false
       currentSubtitleIndex.value = (currentSubtitleIndex.value + 1) % subtitles.length
       textToType.value = subtitles[currentSubtitleIndex.value]
@@ -73,34 +74,11 @@ const typeText = () => {
   }
 }
 
-// Add intersection observer for section detection
+let typingInterval: ReturnType<typeof setInterval>
+
 onMounted(() => {
   typingInterval = setInterval(typeText, isDeleting.value ? deletingSpeed.value : typingSpeed.value)
-
-  const options = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.5,
-  }
-
-  const callback: IntersectionObserverCallback = (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        activeSection.value = entry.target.id
-      }
-    })
-  }
-
-  const observer = new IntersectionObserver(callback, options)
-
-  // Observe all sections
-  sections.forEach((section) => {
-    const element = document.getElementById(section.toLowerCase())
-    if (element) observer.observe(element)
-  })
 })
-
-let typingInterval: ReturnType<typeof setInterval>
 
 onUnmounted(() => {
   clearInterval(typingInterval)

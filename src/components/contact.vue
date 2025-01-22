@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center items-center">
+  <div class="flex justify-center items-center mt-20">
     <div class="rounded-lg shadow-lg overflow-hidden w-full max-w-4xl mb-8">
       <div class="flex flex-col lg:flex-row">
         <!-- Left Container -->
@@ -41,10 +41,7 @@
                 placeholder="Name *"
                 autofocus
                 @input="validateField('name')"
-                :class="[
-                  'bg-gray-200  w-full p-3 mb-3 rounded focus:outline-none focus:ring-2 cursor-pointer',
-                  touched.name && errors.name ? 'border-2 border-red-500' : 'focus:ring-yellow-500',
-                ]"
+                :class="[getInputClass('name')]"
               />
               <p v-if="touched.name && errors.name" class="text-red-500 text-sm -mt-2 mb-2">
                 Name is required
@@ -56,12 +53,7 @@
                 type="email"
                 placeholder="Email *"
                 @input="validateField('email')"
-                :class="[
-                  'bg-gray-200 w-full p-3 mb-3 rounded focus:outline-none focus:ring-2 cursor-pointer',
-                  touched.email && errors.email
-                    ? 'border-2 border-red-500'
-                    : 'focus:ring-yellow-500',
-                ]"
+                :class="[getInputClass('email')]"
               />
               <p v-if="touched.email && errors.email" class="text-red-500 text-sm -mt-2 mb-2">
                 Valid email is required
@@ -85,16 +77,7 @@
 
               <!-- Submit Button -->
               <div class="flex justify-end">
-                <button
-                  type="submit"
-                  :disabled="!isFormValid"
-                  :class="[
-                    'uppercase text-sm py-3 px-6 rounded-lg',
-                    isFormValid
-                      ? 'bg-sky-500 text-white hover:opacity-80'
-                      : 'bg-gray-400 text-gray-200 cursor-not-allowed',
-                  ]"
-                >
+                <button type="submit" :disabled="!isFormValid" :class="getButtonClass">
                   Submit
                 </button>
               </div>
@@ -125,7 +108,7 @@ const form = ref<FormData>({
   message: '',
 })
 
-// Touched state to track which fields have been interacted with
+// Touched state to track field interactions
 const touched = ref<Record<keyof FormData, boolean>>({
   name: false,
   email: false,
@@ -143,10 +126,8 @@ const errors = ref<Record<keyof FormData, boolean>>({
 
 // Validate specific field
 const validateField = (fieldName: keyof FormData) => {
-  // Mark the field as touched
   touched.value[fieldName] = true
 
-  // Validate based on field name
   if (fieldName === 'name') {
     errors.value.name = form.value.name.trim() === ''
   } else if (fieldName === 'email') {
@@ -154,46 +135,62 @@ const validateField = (fieldName: keyof FormData) => {
   }
 }
 
-// Validate form
-const isFormValid = computed(() => {
-  return form.value.name.trim() !== '' && isValidEmail(form.value.email)
-})
-
 // Email validation helper
 const isValidEmail = (email: string): boolean => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   return emailRegex.test(email.trim())
 }
 
+// Compute form validity
+const isFormValid = computed(() => {
+  return (
+    !errors.value.name && !errors.value.email && form.value.name.trim() && form.value.email.trim()
+  )
+})
+
+// Get input class based on field state
+const getInputClass = (field: keyof FormData) => {
+  return [
+    'bg-gray-200 w-full p-3 mb-3 rounded focus:outline-none focus:ring-2',
+    touched.value[field] && errors.value[field]
+      ? 'border-2 border-red-500'
+      : 'focus:ring-yellow-500',
+  ].join(' ')
+}
+
+// Get button class
+const getButtonClass = computed(() => {
+  return [
+    'uppercase text-sm py-3 px-6 rounded-lg',
+    isFormValid.value
+      ? 'bg-sky-500 text-white hover:opacity-80'
+      : 'bg-gray-400 text-gray-200 cursor-not-allowed',
+  ].join(' ')
+})
+
 // Form submission handler
 const submitForm = () => {
-  // Validate all fields before submission
   Object.keys(form.value).forEach((field) => {
-    touched.value[field as keyof FormData] = true
     validateField(field as keyof FormData)
   })
 
-  // Check form validity
-  if (!isFormValid.value) {
-    return
-  }
+  if (!isFormValid.value) return
 
-  // Construct mailto link
-  const mailtoLink = `mailto:e.jae02@gmail.com?subject=Contact Form Submission&body=Name: ${encodeURIComponent(form.value.name)}%0A%0AEmail: ${encodeURIComponent(form.value.email)}0A%0APhone: ${encodeURIComponent(form.value.phone)}%0A%0AMessage: ${encodeURIComponent(form.value.message)}`
+  const mailtoLink = `mailto:e.jae02@gmail.com?subject=Contact Form Submission&body=${encodeURIComponent(
+    Object.entries(form.value)
+      .map(([key, value]) => `${key}: ${value}`)
+      .join('%0A'),
+  )}`
 
-  // Open default email client
   window.location.href = mailtoLink
 
-  // Scroll to top after submission
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-
-  // Reset form and touched state
   form.value = {
     name: '',
     email: '',
     phone: '',
     message: '',
   }
+
   touched.value = {
     name: false,
     email: false,
