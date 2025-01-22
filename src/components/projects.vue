@@ -92,7 +92,7 @@ const projects = ref([
     liveLink: '',
   },
   {
-    name: 'School Dashboard',
+    name: 'School Mangement',
     description: 'Platform to manage and track academic activities.',
     image: '/lms.png',
     githubLink: '',
