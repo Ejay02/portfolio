@@ -88,15 +88,22 @@ const projects = ref([
     name: 'Restaurant Admin',
     description: 'Admin dashboard for food-ordering website.',
     image: '/rest_admin.png',
-    githubLink: '',
-    liveLink: '',
+    githubLink: 'https://github.com/Ejay02/restaurant_dash',
+    liveLink: 'quick-dash-restaurant.netlify.app',
   },
   {
     name: 'School Dashboard',
     description: 'Platform to manage and track academic activities.',
     image: '/lms.png',
-    githubLink: '',
-    liveLink: '',
+    githubLink: 'https://github.com/Ejay02/school-management-frontend',
+    liveLink: 'eduhub-portal.netlify.app',
+  },
+  {
+    name: 'LMS',
+    description: 'Learning platform for students and instructors.',
+    image: '/edulms.png',
+    githubLink: 'https://github.com/Ejay02/lms-frontend',
+    liveLink: 'https://ej-lms.netlify.app',
   },
 ])
 </script>
