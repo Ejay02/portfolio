@@ -99,18 +99,11 @@ const projects = ref([
     liveLink: 'quick-dash-restaurant.netlify.app',
   },
   {
-    name: 'School Dashboard',
-    description: 'Platform to manage and track academic activities.',
-    image: '/lms.png',
-    githubLink: 'https://github.com/Ejay02/school-management-frontend',
-    liveLink: 'eduhub-portal.netlify.app',
-  },
-  {
     name: 'LMS',
     description: 'Learning platform for students and instructors.',
     image: '/edulms.png',
     githubLink: 'https://github.com/Ejay02/lms-frontend',
-    liveLink: 'https://ej-lms.netlify.app',
+    liveLink: 'https://ej-lms.netlify.app/home',
   },
 ])
 </script>
