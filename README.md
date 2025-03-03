@@ -1,4 +1,4 @@
-# Ej portfolio
+# Ej's portfolio
 
 This template should help get you started developing with Vue 3
 
